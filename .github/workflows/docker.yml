@@ -31,7 +31,7 @@ jobs:
       - "image-info"
 
     env:
-      DOCKER_REPOSITORY: "starknet/pathfinder-firehose"
+      DOCKER_REPOSITORY: "9oel/pathfinder-firehose"
 
     steps:
       - name: "Checkout"
@@ -63,7 +63,7 @@ jobs:
       - "image-info"
 
     env:
-      DOCKER_REPOSITORY: "starknet/pathfinder-firehose"
+      DOCKER_REPOSITORY: "9oel/pathfinder-firehose"
 
     steps:
       - name: "Checkout"
@@ -84,8 +84,12 @@ jobs:
 
       - name: "Build Docker image"
         run: |
+          echo "${VERSION}"
+          echo "--"
           echo "${version}"
+          echo "--"
           echo "${{ needs.image-info.outputs.version }}"
+          echo "--"
           docker buildx build \
           --build-arg PATHFINDER_FORCE_VERSION="v${{ needs.image-info.outputs.version }}" \
             --platform "linux/arm64/v8" \
@@ -105,7 +109,7 @@ jobs:
       - "image-info"
 
     env:
-      DOCKER_REPOSITORY: "starknet/pathfinder-firehose"
+      DOCKER_REPOSITORY: "9oel/pathfinder-firehose"
 
     steps:
       - name: "Login to Docker Hub"
