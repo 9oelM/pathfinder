@@ -21,6 +21,8 @@ jobs:
           [[ $FULL_REF =~ $REGEX ]];
 
           echo "version=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
+          echo "${BASH_REMATCH[1]}"
+          echo "$GITHUB_OUTPUT"
 
   build-amd64:
     name: "Build for linux/amd64"
@@ -43,8 +45,10 @@ jobs:
 
       - name: "Build Docker image"
         run: |
+          echo "${version}"
+          echo "${{ needs.image-info.outputs.version }}"
           docker buildx build \
-            --build-arg PATHFINDER_FORCE_VERSION="v${VERSION}" \
+            --build-arg PATHFINDER_FORCE_VERSION="v${{ needs.image-info.outputs.version }}" \
             --platform "linux/amd64" \
             -t ${DOCKER_REPOSITORY}:${{ needs.image-info.outputs.version }}-amd64 -f ./Dockerfile .
 
@@ -80,8 +84,10 @@ jobs:
 
       - name: "Build Docker image"
         run: |
+          echo "${version}"
+          echo "${{ needs.image-info.outputs.version }}"
           docker buildx build \
-            --build-arg PATHFINDER_FORCE_VERSION="v${VERSION}" \
+          --build-arg PATHFINDER_FORCE_VERSION="v${{ needs.image-info.outputs.version }}" \
             --platform "linux/arm64/v8" \
             --output=type=docker \
             -t ${DOCKER_REPOSITORY}:${{ needs.image-info.outputs.version }}-arm64 -f ./Dockerfile .
