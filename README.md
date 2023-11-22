@@ -9,3 +9,4 @@ Powered by a [GitHub Actions workflow](https://github.com/starknet-graph/pathfin
 - Then, actual patch commits living on the fork `main` branch gets rebased. Before pushing, the branch is compiled to make sure it still builds, and the team gets notified if it doesn't.
 
 Whenever a version is released on the upstream project, we will make the same release except with the patch applied.
+
