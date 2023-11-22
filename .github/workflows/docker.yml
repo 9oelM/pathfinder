@@ -99,7 +99,7 @@ jobs:
       - "image-info"
 
     env:
-      DOCKER_REPOSITORY: "starknet/pathfinder-firehose"
+      DOCKER_REPOSITORY: "9oel/pathfinder-firehose"
 
     steps:
       - name: "Login to Docker Hub"
